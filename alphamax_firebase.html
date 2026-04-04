@@ -101,13 +101,13 @@ body{font-family:'Barlow',sans-serif;color:var(--text);font-size:14px;overflow:h
 .news-card-hero{position:relative;width:100%;height:200px;overflow:hidden;background:var(--bg3);}
 .news-card-hero img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease;}
 .news-card:hover .news-card-hero img{transform:scale(1.03);}
-.news-card-hero-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;background:linear-gradient(135deg,var(--bg3),var(--bg4));color:var(--muted);}
+.news-card-hero-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;background:linear-gradient(135deg,var(--bg3),var(--bg4));color:var(--);}
 .news-card-category{position:absolute;top:10px;left:10px;padding:3px 10px;border-radius:4px;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-family:'Barlow Condensed',sans-serif;backdrop-filter:blur(6px);}
 .cat-alert{background:rgba(255,71,87,.85);color:#fff;}
 .cat-manual{background:rgba(88,101,242,.85);color:#fff;}
 .news-card-inner{padding:16px 18px;}
 .news-card-headline{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:19px;letter-spacing:.3px;line-height:1.3;margin-bottom:6px;color:var(--text);}
-.news-card-summary{font-size:13px;color:var(--muted2);line-height:1.6;margin-bottom:10px;}
+.news-card-summary{font-size:13px;color:var(--2);line-height:1.6;margin-bottom:10px;}
 .news-card-meta{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--muted);font-family:'Barlow Condensed',sans-serif;letter-spacing:.5px;}
 .news-card-players{display:flex;gap:6px;padding:0 18px 16px;flex-wrap:wrap;}
 .nc-player-chip{display:flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:4px 10px 4px 5px;cursor:pointer;transition:all .15s;text-decoration:none;}
@@ -567,10 +567,13 @@ function computeMovements(){
 function updatePrevRanks(){const cur={};sorted().forEach((p,i)=>cur[p.id]=i+1);setPrevRanks(cur);}
 function moveBadgeHTML(id){
   const m=rankMovements[id];if(!m||m.type==='same')return'';
-  if(m.type==='new')return`<span class="rank-move new">NEW</span>`;
-  if(m.type==='up') return`<span class="rank-move up">▲ ${m.delta}</span>`;
-  if(m.type==='down')return`<span class="rank-move down">▼ ${m.delta}</span>`;
-  return'';
+if(m.type==='new') return `<span class="rank-move new">NEW</span>`;
+  
+  // This line is changed to remove the green box and add the checkmark
+  if(m.type==='up')  return `<span style="color:var(--muted2); margin-left:8px; font-weight:800;">✓ VERIFIED</span>`;
+  
+  if(m.type==='down') return `<span class="rank-move down">▼ ${m.delta}</span>`;
+  return '';
 }
 function avSmall(p,sz,r){
   const init=p.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
