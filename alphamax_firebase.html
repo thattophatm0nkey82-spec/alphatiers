@@ -570,10 +570,13 @@ function moveBadgeHTML(id){
 if(m.type==='new') return `<span class="rank-move new">NEW</span>`;
   
   // This line is changed to remove the green box and add the checkmark
-  if(m.type==='up')  return `<span style="color:var(--muted2); margin-left:8px; font-weight:800;">✓ VERIFIED</span>`;
-  
-  if(m.type==='down') return `<span class="rank-move down">▼ ${m.delta}</span>`;
-  return '';
+ if(m.type==='new') return `<span class="rank-move new">NEW</span>`;
+
+// Change this line to show a clean checkmark instead of the green badge
+if(m.type==='up')  return `<span style="color:var(--muted2); margin-left:8px; font-weight:800; font-family:'Barlow Condensed', sans-serif;">✓ VERIFIED</span>`;
+
+if(m.type==='down') return `<span class="rank-move down">▼ ${m.delta}</span>`;
+return '';
 }
 function avSmall(p,sz,r){
   const init=p.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
